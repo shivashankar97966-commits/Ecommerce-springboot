@@ -5,13 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
-    private Long nextId = 1L;
 
     @GetMapping("/api/users")
     public ResponseEntity<List<User>> getAllUsers() {
@@ -26,8 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/api/users")
-    public ResponseEntity<List<User>> createUser(@RequestBody User user) {
-        user.setId(nextId++);
+    public ResponseEntity<Optional<User>> createUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.addUser(user));
     }
 

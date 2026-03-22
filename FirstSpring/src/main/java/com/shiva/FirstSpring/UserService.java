@@ -1,35 +1,34 @@
 package com.shiva.FirstSpring;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    private List<User> userList = new ArrayList<>();
+    private final UserRepository userRepository;
 
     public List<User> fetchAllUsers() {
-        return userList;
+        return userRepository.findAll();
     }
 
     public Optional<User> fetchUser(Long id) {
-        return userList.stream().filter(user -> user.getId().equals(id)).findFirst();
+        return userRepository.findById(id);
     }
 
-    public List<User> addUser(User user) {
-        userList.add(user);
-        return userList;
+    public Optional<User> addUser(User user) {
+        return Optional.of(userRepository.save(user));
     }
 
     public Optional<User>updateFirstName(Long id, User updatedUser) {
-        return Optional.ofNullable(userList.stream()
-                .filter(user -> user.getId().equals(id))
-                .findFirst()
+        return Optional.ofNullable(userRepository.findById(id)
                 .map(existingUser -> {
                     existingUser.setFirstName(updatedUser.getFirstName());
                     existingUser.setLastName(updatedUser.getLastName());
+                    userRepository.save(existingUser);
                     return existingUser;
                 }).orElse(null));
     }
