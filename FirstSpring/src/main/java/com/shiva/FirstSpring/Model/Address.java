@@ -1,4 +1,4 @@
-package com.shiva.FirstSpring;
+package Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,11 +9,14 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity(name = "user_table")
-public class User {
+@Entity(name = "Addresses")
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String firstName;
-    private String lastName;
+    private Long id;
+    private String street;
+    private String city;
+    private String state;
+    private String country;
+    private String zipcode;
 }

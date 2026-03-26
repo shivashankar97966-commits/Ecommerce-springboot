@@ -1,5 +1,7 @@
-package com.shiva.FirstSpring;
+package com.shiva.FirstSpring.Service;
 
+import com.shiva.FirstSpring.Model.User;
+import com.shiva.FirstSpring.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

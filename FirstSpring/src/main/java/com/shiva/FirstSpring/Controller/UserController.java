@@ -1,5 +1,7 @@
-package com.shiva.FirstSpring;
+package com.shiva.FirstSpring.Controller;
 
+import com.shiva.FirstSpring.Model.User;
+import com.shiva.FirstSpring.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
