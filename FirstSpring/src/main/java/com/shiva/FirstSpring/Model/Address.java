@@ -1,4 +1,4 @@
-package Model;
+package com.shiva.FirstSpring.Model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
