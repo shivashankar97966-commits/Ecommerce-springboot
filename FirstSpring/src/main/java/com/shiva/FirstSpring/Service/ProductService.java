@@ -7,7 +7,9 @@ import com.shiva.FirstSpring.dto.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,27 @@ public class ProductService {
         updateProductRequestFromProduct(product, productRequest);
         Product savedProduct = productRepository.save(product);
         return mapToProductResponse(savedProduct);
+    }
+
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findByActiveTrue().
+                stream().
+                map(this::mapToProductResponse).
+                collect(Collectors.toList());
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id).
+                orElseThrow(()-> new RuntimeException("Product not found"));
+        product.setActive(false);
+        productRepository.save(product);
+    }
+
+    public List<ProductResponse> searchProducts(String keyword) {
+        return productRepository.searchProducts(keyword).
+                stream().
+                map(this::mapToProductResponse).
+                collect(Collectors.toList());
     }
 
     public Optional<ProductResponse> updateProduct(Long id, ProductRequest productRequest) {
